@@ -5,8 +5,8 @@ import http from "@/services/httpService";
 function AuthPage() {
   const [phoneNumber, setPhoneNumber]=useState("");
   console.log(phoneNumber);
-  const phoneNumberHandler=(e)=>{
-
+  const phoneNumberHandler = (e) => {
+    setPhoneNumber(e.target.value);
   };
   const sendOTPHandler= async(e)=>{
     e.preventDefault();

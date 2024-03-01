@@ -2,6 +2,7 @@
 import { useState } from "react";
 import SendOTPFrom from "./SendOTPFrom";
 import http from "@/services/httpService";
+import { toast } from "react-hot-toast";
 function AuthPage() {
   const [phoneNumber, setPhoneNumber]=useState("");
   console.log(phoneNumber);
@@ -11,10 +12,11 @@ function AuthPage() {
   const sendOTPHandler= async(e)=>{
     e.preventDefault();
     try {
-      const data = await http.post("/user/get-otp",{phoneNumber})
-      console.log(data)
+      const { data } = await http.post("/user/get-otp",{ phoneNumber });
+      console.log(data.data);
     } catch (error) {
-      console.log(error)
+      toast.error(error.response?.data?.message);
+     
     }
   };
   return (

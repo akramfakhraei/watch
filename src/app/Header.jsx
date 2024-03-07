@@ -9,9 +9,9 @@ function Header() {
   })
   return (
     <header
-      className={`shadow-md mb-10 sticky top-0 transition-all duration-200 bg-red 
-       
-      }`}
+    className={`shadow-md mb-10 sticky top-0 transition-all duration-200 bg-white ${
+      isLoading ? "blur-sm opacity-70" : "opacity-100 blur-0"
+    }`}
     >
       <nav>
         <ul className="flex items-center  justify-between py-2 container xl:max-w-screen-xl">

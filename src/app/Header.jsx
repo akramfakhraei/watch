@@ -1,11 +1,9 @@
 "use client";
 import { useGetUser } from "@/hooks/useAuth";
-import { getUserProfile } from "@/services/authServices";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 function Header() {
-  const { user, cart } = data || {};
   const { data, error, isLoading } = useGetUser();
+  const { user, cart } = data || {};
   return (
     <header
     className={`shadow-md mb-10 sticky top-0 transition-all duration-200 bg-white ${
@@ -25,12 +23,12 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link className="block py-2" href="/">
+            <Link className="block py-2" href="/profile">
               پنل کاربر
             </Link>
           </li>
           <li>
-            <Link className="block py-2" href="/">
+            <Link className="block py-2" href="/admin">
               پنل ادمین
             </Link>
           </li>

@@ -18,12 +18,12 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link className="block py-2" href="/produts">
+            <Link className="block py-2" href="/products">
               محصولات
             </Link>
           </li>
           <li>
-            <Link className="block py-2" href="/profile">
+            <Link className="block py-2" href="/profile/me">
               پنل کاربر
             </Link>
           </li>

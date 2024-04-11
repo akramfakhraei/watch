@@ -1,23 +1,39 @@
 "use client";
+
 import Loading from "@/common/Loading";
 import TextField from "@/common/TextField";
 import { useGetUser } from "@/hooks/useAuth";
 import { updateProfile } from "@/services/authServices";
 import { includeObj } from "@/utils/objectUtils";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+
 function MePage() {
-const { data, isLoading } = useGetUser();
-const { isLoading: isUpdating, mutateAsync } = useMutation({
+  const { data, isLoading } = useGetUser();
+  const queryClient = useQueryClient();
+  const { isLoading: isUpdating, mutateAsync } = useMutation({
     mutationFn: updateProfile,
   });
-const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({});
   const { user } = data || {};
 
   const includeskey = ["name", "email", "phoneNumber", "biography"];
   useEffect(() => {
     if (user) setFormData(includeObj(user, includeskey));
   }, [user]);
+
+  const sumbitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { message } = await mutateAsync(formData);
+      queryClient.invalidateQueries({ queryKey: ["get-user"] });
+      toast.success(message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  
   if (isLoading) return <Loading />;
 
   return (
@@ -49,7 +65,5 @@ const [formData, setFormData] = useState({});
       </form>
     </div>
   );
- 
 }
-
-export default MePage
+export default MePage;

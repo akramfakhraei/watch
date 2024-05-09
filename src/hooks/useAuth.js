@@ -8,3 +8,10 @@ export const useGetUser = () =>
     retry: false,
     refetchOnWindowFocus: true,
   });
+  export const useGetUsers = () =>
+  useQuery({
+    queryKey: ["get-users"],
+    queryFn: getAllUsers,
+    retry: false,
+    refetchOnWindowFocus: true,
+  });
